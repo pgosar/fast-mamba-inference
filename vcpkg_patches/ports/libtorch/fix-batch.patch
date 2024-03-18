@@ -1,0 +1,41 @@
+diff --git a/aten/src/ATen/functorch/BatchRulesLoss.cpp b/aten/src/ATen/functorch/BatchRulesLoss.cpp
+--- a/aten/src/ATen/functorch/BatchRulesLoss.cpp
++++ b/aten/src/Aten/functorch/BatchRulesLoss.cpp
+@@ -49,2 +49,3 @@
+   TORCH_INTERNAL_ASSERT(false);
++  return std::make_tuple(result.sum(-1), 0);
+ };
+diff --git a/aten/src/ATen/functorch/BatchRulesReduceOps.cpp b/aten/src/ATen/functorch/BatchRulesReduceOps.cpp
+--- a/aten/src/ATen/functorch/BatchRulesReduceOps.cpp
++++ b/aten/src/ATen/functorch/BatchRulesReduceOps.cpp
+@@ -405,2 +405,3 @@
+   TORCH_INTERNAL_ASSERT(false);
++  return std::make_tuple(sorted_sequence, 0);
+ }
+diff --git a/aten/src/ATen/native/Convolution.cpp b/aten/src/ATen/native/Convolution.cpp
+--- a/aten/src/ATen/native/Convolution.cpp
++++ b/aten/src/ATen/native/Convolution.cpp
+@@ -1045,2 +1045,3 @@
+   TORCH_CHECK(false, "Invalid padding string: '", padding, "'");
++  return bias;
+ }
+diff --git a/aten/src/ATen/native/LossNLL.cpp b/aten/src/ATen/native/LossNLL.cpp
+--- a/aten/src/ATen/native/LossNLL.cpp
++++ b/aten/src/ATen/native/LossNLL.cpp
+@@ -548,1 +548,2 @@
++  return target;
+ }
+diff --git a/aten/src/ATen/native/Normalization.cpp b/aten/src/ATen/native/Normalization.cpp
+--- a/aten/src/ATen/native/Normalization.cpp
++++ b/aten/src/ATen/native/Normalization.cpp
+@@ -637,2 +637,3 @@
+   TORCH_INTERNAL_ASSERT(false, "Unsupported impl_index in _batch_norm_impl_index_backward: ", impl_index);
++  return std::make_tuple(weight, running_var, running_mean);
+ }
+diff --git a/aten/src/ATen/native/prim_native_functions.cpp b/aten/src/ATen/native/prim_native_functions.cpp
+--- a/aten/src/ATen/native/prim_native_functions.cpp
++++ b/aten/src/ATen/native/prim_native_functions.cpp
+@@ -32,2 +32,3 @@
+   TORCH_INTERNAL_ASSERT(false, "Expected non-Tensor backend scalar");
++  return false;
+ }
